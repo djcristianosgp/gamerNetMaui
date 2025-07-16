@@ -1,0 +1,23 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GamerApp.Pages.GamePage"
+             Title="Em jogo">
+    <AbsoluteLayout>
+        <Label x:Name="lblStatus"
+               Text="Contando..."
+               TextColor="White"
+               FontSize="16"
+               AbsoluteLayout.LayoutBounds="0,0,1,30"
+               AbsoluteLayout.LayoutFlags="WidthProportional" />
+
+        <GraphicsView x:Name="canvas"
+                     AbsoluteLayout.LayoutBounds="0,0,1,0.9"
+              AbsoluteLayout.LayoutFlags="All"
+                      HeightRequest="500" />
+
+        <Button Text="Finalizar"
+                AbsoluteLayout.LayoutBounds="0.5,1,200,50"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Clicked="OnFinalizar" />
+    </AbsoluteLayout>
+</ContentPage>

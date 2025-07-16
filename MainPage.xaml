@@ -1,0 +1,13 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GamerApp.MainPage"
+             Title="Gamer App">
+    <VerticalStackLayout Padding="20">
+        <Label Text="🪨 Pedra, 📄 Papel e ✂️ Tesoura" FontSize="24" HorizontalOptions="Center" />
+        <Label Text="Quantidade de objetos:" />
+        <Entry x:Name="txtQuantidade" Text="50" Keyboard="Numeric" />
+        <Label Text="Velocidade de movimento:" />
+        <Entry x:Name="txtVelocidade" Text="0.5" Keyboard="Numeric" />
+        <Button Text="Iniciar Jogo" Clicked="OnStartClicked" />
+    </VerticalStackLayout>
+</ContentPage>
