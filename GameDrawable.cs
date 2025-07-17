@@ -1,5 +1,8 @@
 ﻿using GamerApp.Models;
+using Java.Security;
 using Microsoft.Maui.Graphics.Platform;
+using System.IO;
+using System.Threading.Tasks;
 using IImage = Microsoft.Maui.Graphics.IImage;
 
 namespace GamerApp
@@ -8,19 +11,34 @@ namespace GamerApp
     {
         private List<GameObject> _objetos;
         private IImage _imgRock, _imgPaper, _imgScissors;
+
         public GameDrawable(List<GameObject> objetos)
         {
             _objetos = objetos;
-
-            _imgRock = LoadImage("Resources\\Images\\pedra.png");
-            _imgPaper = LoadImage("Resources\\Images\\papel.png");
-            _imgScissors = LoadImage("Resources\\Images\\tesoura.png");
+            // Images will be loaded in the InitializeImagesAsync method
         }
 
-        private IImage LoadImage(string filename)
+        public async Task InitializeImagesAsync()
         {
-            var stream = FileSystem.OpenAppPackageFileAsync(filename).Result;
-            return PlatformImage.FromStream(stream);
+            _imgRock = await LoadImage("Resources.Images.pedra.png");
+            _imgPaper = await LoadImage("Resources.Images.papel.png");
+            _imgScissors = await LoadImage("Resources.Images.tesoura.png");
+        }
+
+        private async Task<IImage> LoadImage(string filename)
+        {
+            try
+            {
+                using var stream = await FileSystem.OpenAppPackageFileAsync(filename);
+                return PlatformImage.FromStream(stream);
+
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                Console.WriteLine($"Error loading image {filename}: {ex.Message}");
+                return null;
+            }
         }
 
         public void Draw(ICanvas canvas, RectF dirtyRect)

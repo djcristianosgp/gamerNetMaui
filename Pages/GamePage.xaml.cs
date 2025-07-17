@@ -19,10 +19,17 @@ namespace GamerApp.Pages
 
             _drawable = new GameDrawable(_objetos);
             canvas.Drawable = _drawable;
-            canvas.Invalidate();
+            // No longer calling Invalidate() here directly
 
+            InitializeGameAsync(); // Call the new async initialization method
+
+        }
+
+        private async void InitializeGameAsync()
+        {
+            await _drawable.InitializeImagesAsync(); // Await image loading
+            canvas.Invalidate(); // Invalidate after images are loaded
             StartGame();
-
         }
         private void StartGame()
         {
